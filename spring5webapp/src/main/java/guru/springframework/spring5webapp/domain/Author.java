@@ -20,6 +20,7 @@ public class Author {
     private Long id;
     private String firstName;
     private String lastName;
+    @ManyToMany(mappedBy = "authors")
     private Set<Book> books;
 
     // JPA also require a ZERO args constructor
