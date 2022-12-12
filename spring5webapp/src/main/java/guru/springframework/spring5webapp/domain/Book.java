@@ -14,10 +14,10 @@ public class Book {
     private String title;
     private String isbn;
     @ManyToOne
-    @JoinColumn(
-            name = "publisher_id",
-            referencedColumnName = "id"
-    )
+//    @JoinColumn(
+//            name = "publisher_id",
+//            referencedColumnName = "id"
+//    )
     private Publisher publisher;
     @ManyToMany
     @JoinTable(
