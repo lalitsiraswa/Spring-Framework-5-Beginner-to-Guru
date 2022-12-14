@@ -17,6 +17,8 @@ public class SfgDependencyInjectionApplication {
 		ApplicationContext applicationContext = SpringApplication.run(SfgDependencyInjectionApplication.class, args);
 //		MyController myController = applicationContext.getBean(MyController.class);
 		MyController myController = (MyController) applicationContext.getBean("myController");
+
+		System.out.println("------------------ Primary Bean ------------------");
 		System.out.println(myController.sayHello());
 
 		System.out.println("------ Property Based Dependency Injection Using Spring ------");
