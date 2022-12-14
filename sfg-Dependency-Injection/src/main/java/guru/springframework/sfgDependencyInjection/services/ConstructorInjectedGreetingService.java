@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 @Service // Field greetingService in guru.springframework.sfgDependencyInjection.controllers.PropertyInjectedController
 // required a bean of type 'guru.springframework.sfgDependencyInjection.services.GreetingService'
 // that could not be found.
-public class ConstructorGreetingService implements GreetingService{
+public class ConstructorInjectedGreetingService implements GreetingService{
     @Override
     public String sayGreeting() {
-        return "Hello World!";
+        return "Hello World! - Constructor";
     }
 }
