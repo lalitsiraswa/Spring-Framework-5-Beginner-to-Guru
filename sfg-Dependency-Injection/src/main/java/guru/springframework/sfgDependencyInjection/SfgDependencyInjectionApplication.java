@@ -1,9 +1,6 @@
 package guru.springframework.sfgDependencyInjection;
 
-import guru.springframework.sfgDependencyInjection.controllers.ConstructorInjectedController;
-import guru.springframework.sfgDependencyInjection.controllers.MyController;
-import guru.springframework.sfgDependencyInjection.controllers.PropertyInjectedController;
-import guru.springframework.sfgDependencyInjection.controllers.SetterInjectedController;
+import guru.springframework.sfgDependencyInjection.controllers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -32,5 +29,9 @@ public class SfgDependencyInjectionApplication {
 		System.out.println("------ Constructor Based Dependency Injection Using Spring ------");
 		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController)applicationContext.getBean("constructorInjectedController");
 		System.out.println(constructorInjectedController.sayGreeting());
+
+		System.out.println("------------------ Spring Profiles ------------------");
+		I18nController i18nController = (I18nController)applicationContext.getBean("i18nController");
+		System.out.println(i18nController.sayHello());
 	}
 }
