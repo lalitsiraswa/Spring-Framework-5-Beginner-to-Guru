@@ -1,10 +1,10 @@
 package guru.springframework.sfgDependencyInjection.config;
 
-import guru.springframework.sfgDependencyInjection.services.ConstructorInjectedGreetingService;
-import guru.springframework.sfgDependencyInjection.services.PropertyInjectedGreetingService;
-import guru.springframework.sfgDependencyInjection.services.SetterInjectedGreetingService;
+import guru.springframework.sfgDependencyInjection.services.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 
 // Java Based Configuration
 @Configuration
@@ -24,5 +24,26 @@ public class GreetingServiceConfig {
     @Bean
     SetterInjectedGreetingService setterInjectedGreetingService(){
         return new SetterInjectedGreetingService();
+    }
+
+    @Primary
+    @Bean
+    PrimaryGreetingService primaryGreetingService(){
+        return new PrimaryGreetingService();
+    }
+    @Profile("ENGLISH")
+    @Bean("i18nService")
+    I18nEnglishGreetingService i18nEnglishGreetingService(){
+        return new I18nEnglishGreetingService();
+    }
+    @Profile({"HINDI", "default"})
+    @Bean("i18nService")
+    I18nHindiGreetingService i18nHindiGreetingService(){
+        return new I18nHindiGreetingService();
+    }
+    @Profile("SPANISH")
+    @Bean("i18nService")
+    I18nSpanishGreetingService i18nSpanishGreetingService(){
+        return new I18nSpanishGreetingService();
     }
 }
