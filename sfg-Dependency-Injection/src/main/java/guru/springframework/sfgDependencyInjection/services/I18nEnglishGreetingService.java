@@ -1,7 +1,6 @@
 package guru.springframework.sfgDependencyInjection.services;
 
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
+import guru.springframework.sfgDependencyInjection.repositories.EnglishGreetingRepository;
 
 //@Profile("ENGLISH")
 // Spring Managed Component
@@ -9,8 +8,14 @@ import org.springframework.stereotype.Service;
 // required a bean of type 'guru.springframework.sfgDependencyInjection.services.GreetingService'
 // that could not be found.
 public class I18nEnglishGreetingService implements GreetingService{
+    private final EnglishGreetingRepository englishGreetingRepository;
+
+    public I18nEnglishGreetingService(EnglishGreetingRepository englishGreetingRepository) {
+        this.englishGreetingRepository = englishGreetingRepository;
+    }
+
     @Override
     public String sayGreeting() {
-        return "Hello World! - ENGLISH";
+        return englishGreetingRepository.getGreeting();
     }
 }

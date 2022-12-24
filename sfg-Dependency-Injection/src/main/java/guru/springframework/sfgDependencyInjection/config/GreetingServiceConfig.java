@@ -1,5 +1,7 @@
 package guru.springframework.sfgDependencyInjection.config;
 
+import guru.springframework.sfgDependencyInjection.repositories.EnglishGreetingRepository;
+import guru.springframework.sfgDependencyInjection.repositories.EnglishGreetingRepositoryImpl;
 import guru.springframework.sfgDependencyInjection.services.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,10 +33,14 @@ public class GreetingServiceConfig {
     PrimaryGreetingService primaryGreetingService(){
         return new PrimaryGreetingService();
     }
+    @Bean
+    EnglishGreetingRepository englishGreetingRepository(){
+        return new EnglishGreetingRepositoryImpl();
+    }
     @Profile("ENGLISH")
     @Bean("i18nService")
-    I18nEnglishGreetingService i18nEnglishGreetingService(){
-        return new I18nEnglishGreetingService();
+    I18nEnglishGreetingService i18nEnglishGreetingService(EnglishGreetingRepository englishGreetingRepository){
+        return new I18nEnglishGreetingService(englishGreetingRepository);
     }
     @Profile({"HINDI", "default"})
     @Bean("i18nService")
