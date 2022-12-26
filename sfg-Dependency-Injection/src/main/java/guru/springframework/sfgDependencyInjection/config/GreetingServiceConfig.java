@@ -1,5 +1,8 @@
 package guru.springframework.sfgDependencyInjection.config;
 
+import com.springframework.pets.DogPetService;
+import com.springframework.pets.PetService;
+import com.springframework.pets.PetServiceFactory;
 import guru.springframework.sfgDependencyInjection.repositories.EnglishGreetingRepository;
 import guru.springframework.sfgDependencyInjection.repositories.EnglishGreetingRepositoryImpl;
 import guru.springframework.sfgDependencyInjection.services.*;
@@ -13,6 +16,20 @@ import org.springframework.context.annotation.Profile;
 public class GreetingServiceConfig {
     // To make this spring component, we need to @Annotated with @Bean
     // By-Default the name of generated Bean inside the Spring Context is the name of the method (constructorInjectedGreetingService)
+    @Bean
+    PetServiceFactory petServiceFactory(){
+        return new PetServiceFactory();
+    }
+    @Profile({"default", "DOG"})
+    @Bean
+    PetService DogPetService(PetServiceFactory petServiceFactory){
+        return petServiceFactory.getPetService("dog");
+    }
+    @Profile("CAT")
+    @Bean
+    PetService CatPetService(PetServiceFactory petServiceFactory){
+        return petServiceFactory.getPetService("cat");
+    }
     @Bean
     ConstructorInjectedGreetingService constructorInjectedGreetingService(){
         return new ConstructorInjectedGreetingService();
