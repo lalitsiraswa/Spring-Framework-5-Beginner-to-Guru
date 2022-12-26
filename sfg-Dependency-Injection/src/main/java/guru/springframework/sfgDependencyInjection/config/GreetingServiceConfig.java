@@ -6,12 +6,10 @@ import com.springframework.pets.PetServiceFactory;
 import guru.springframework.sfgDependencyInjection.repositories.EnglishGreetingRepository;
 import guru.springframework.sfgDependencyInjection.repositories.EnglishGreetingRepositoryImpl;
 import guru.springframework.sfgDependencyInjection.services.*;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.*;
 
 // Java Based Configuration
+@ImportResource("classpath:sfgdi-config.xml")
 @Configuration
 public class GreetingServiceConfig {
     // To make this spring component, we need to @Annotated with @Bean
@@ -30,20 +28,20 @@ public class GreetingServiceConfig {
     PetService CatPetService(PetServiceFactory petServiceFactory){
         return petServiceFactory.getPetService("cat");
     }
-    @Bean
-    ConstructorInjectedGreetingService constructorInjectedGreetingService(){
-        return new ConstructorInjectedGreetingService();
-    }
+    // @Bean
+//    ConstructorInjectedGreetingService constructorInjectedGreetingService(){
+//        return new ConstructorInjectedGreetingService();
+//    }
     // By-Default the name of generated Bean inside the Spring Context is the name of the method (propertyInjectedGreetingService)
-    @Bean
-    PropertyInjectedGreetingService propertyInjectedGreetingService(){
-        return new PropertyInjectedGreetingService();
-    }
+    // @Bean
+//    PropertyInjectedGreetingService propertyInjectedGreetingService(){
+//        return new PropertyInjectedGreetingService();
+//    }
     // By-Default the name of generated Bean inside the Spring Context is the name of the method (setterInjectedGreetingService)
-    @Bean
-    SetterInjectedGreetingService setterInjectedGreetingService(){
-        return new SetterInjectedGreetingService();
-    }
+    // @Bean
+//    SetterInjectedGreetingService setterInjectedGreetingService(){
+//        return new SetterInjectedGreetingService();
+//    }
 
     @Primary
     @Bean
