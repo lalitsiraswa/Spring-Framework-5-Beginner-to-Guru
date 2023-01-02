@@ -3,17 +3,31 @@ package guru.springframework.sfgDependencyInjection.config;
 import com.springframework.pets.DogPetService;
 import com.springframework.pets.PetService;
 import com.springframework.pets.PetServiceFactory;
+import guru.springframework.sfgDependencyInjection.datasource.FakeDataSource;
 import guru.springframework.sfgDependencyInjection.repositories.EnglishGreetingRepository;
 import guru.springframework.sfgDependencyInjection.repositories.EnglishGreetingRepositoryImpl;
 import guru.springframework.sfgDependencyInjection.services.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 
 // Java Based Configuration
+@PropertySource("classpath:datasource.properties")
 @ImportResource("classpath:sfgdi-config.xml")
 @Configuration
 public class GreetingServiceConfig {
     // To make this spring component, we need to @Annotated with @Bean
     // By-Default the name of generated Bean inside the Spring Context is the name of the method (constructorInjectedGreetingService)
+    @Bean // Here '$' sign represents (take the string and replace with its value)
+    FakeDataSource fakeDataSource(
+            @Value("${guru.username}") String username,
+            @Value("${guru.password}") String password,
+            @Value("${guru.jdbcurl}") String jdbcurl){
+        FakeDataSource fakeDataSource = new FakeDataSource();
+        fakeDataSource.setUsername(username);
+        fakeDataSource.setPassword(password);
+        fakeDataSource.setJdbcurl(jdbcurl);
+        return fakeDataSource;
+    }
     @Bean
     PetServiceFactory petServiceFactory(){
         return new PetServiceFactory();

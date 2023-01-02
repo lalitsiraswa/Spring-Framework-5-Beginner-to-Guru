@@ -1,6 +1,7 @@
 package guru.springframework.sfgDependencyInjection;
 
 import guru.springframework.sfgDependencyInjection.controllers.*;
+import guru.springframework.sfgDependencyInjection.datasource.FakeDataSource;
 import guru.springframework.sfgDependencyInjection.services.PrototypeBean;
 import guru.springframework.sfgDependencyInjection.services.SingletonBean;
 import org.springframework.boot.SpringApplication;
@@ -8,9 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 
 import java.sql.SQLOutput;
-
+//@PropertySource("classpath:datasource.properties")
 //@ImportResource("classpath:sfgdi-config.xml")
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.springframework.pets", "guru.springframework.sfgDependencyInjection"})
@@ -44,16 +46,22 @@ public class SfgDependencyInjectionApplication {
 //		I18nController i18nController = (I18nController)applicationContext.getBean("i18nController");
 //		System.out.println(i18nController.sayHello());
 
-		System.out.println("------------------ Bean Scopes ------------------");
+//		System.out.println("------------------ Bean Scopes ------------------");
 //		SingletonBean singletonBean1 = (SingletonBean) applicationContext.getBean("singletonBean");
-		SingletonBean singletonBean1 = applicationContext.getBean(SingletonBean.class);
-		System.out.println(singletonBean1.getMyScope());
-		SingletonBean singletonBean2 = applicationContext.getBean(SingletonBean.class);
-		System.out.println(singletonBean2.getMyScope());
+//		SingletonBean singletonBean1 = applicationContext.getBean(SingletonBean.class);
+//		System.out.println(singletonBean1.getMyScope());
+//		SingletonBean singletonBean2 = applicationContext.getBean(SingletonBean.class);
+//		System.out.println(singletonBean2.getMyScope());
+//
+//		PrototypeBean prototypeBean1 = applicationContext.getBean(PrototypeBean.class);
+//		System.out.println(prototypeBean1.getMyScope());
+//		PrototypeBean prototypeBean2 = applicationContext.getBean(PrototypeBean.class);
+//		System.out.println(prototypeBean2.getMyScope());
 
-		PrototypeBean prototypeBean1 = applicationContext.getBean(PrototypeBean.class);
-		System.out.println(prototypeBean1.getMyScope());
-		PrototypeBean prototypeBean2 = applicationContext.getBean(PrototypeBean.class);
-		System.out.println(prototypeBean2.getMyScope());
+		System.out.println("------------------ Using Properties Source ------------------");
+		FakeDataSource fakeDataSource = (FakeDataSource)applicationContext.getBean("fakeDataSource");
+		System.out.println(fakeDataSource.getUsername());
+		System.out.println(fakeDataSource.getPassword());
+		System.out.println(fakeDataSource.getJdbcurl());
 	}
 }
