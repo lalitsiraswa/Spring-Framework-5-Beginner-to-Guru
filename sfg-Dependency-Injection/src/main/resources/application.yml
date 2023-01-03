@@ -1,9 +1,37 @@
+#spring:
+#  profiles:
+#    active: DOG,ENGLISH,prod
 spring:
   profiles:
-    active: DOG,ENGLISH,qa
+    active:
+      - DOG # yml list
+      - ENGLISH
+      - test
 # If we select 'qa' then application-qa.yml profile will be active and
 # if we write 'dev' then application-dev.yml profile will be active.
 guru:
   username: YmlUserName
   password: YmlPassword
   jdbcurl: YmlURL
+
+---
+# these three '---' indicates starting of another new yml configuration (file)
+spring:
+  config:
+    activate:
+      on-profile: prod # 'prod' : production
+guru:
+  username: YmlProdUserName
+  password: YmlProdPassword
+  jdbcurl: YmlProdURL
+
+---
+# another new yml configuration (file)
+spring:
+  config:
+    activate:
+      on-profile: test
+guru:
+  username: YmlTestUserName
+  password: YmlTestPassword
+  jdbcurl: YmlTestURL
