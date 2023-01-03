@@ -1,7 +1,8 @@
 spring:
   profiles:
-    active: DOG,ENGLISH
-
+    active: DOG,ENGLISH,qa
+# If we select 'qa' then application-qa.yml profile will be active and
+# if we write 'dev' then application-dev.yml profile will be active.
 guru:
   username: YmlUserName
   password: YmlPassword
