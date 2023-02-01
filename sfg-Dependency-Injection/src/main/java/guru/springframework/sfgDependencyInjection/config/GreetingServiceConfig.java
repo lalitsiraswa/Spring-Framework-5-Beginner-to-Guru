@@ -17,15 +17,23 @@ import org.springframework.context.annotation.*;
 public class GreetingServiceConfig {
     // To make this spring component, we need to @Annotated with @Bean
     // By-Default the name of generated Bean inside the Spring Context is the name of the method (constructorInjectedGreetingService)
+//    @Bean // Here '$' sign represents (take the string and replace with its value)
+//    FakeDataSource fakeDataSource(
+//            @Value("${guru.username}") String username,
+//            @Value("${guru.password}") String password,
+//            @Value("${guru.jdbcurl}") String jdbcurl){
+//        FakeDataSource fakeDataSource = new FakeDataSource();
+//        fakeDataSource.setUsername(username);
+//        fakeDataSource.setPassword(password);
+//        fakeDataSource.setJdbcurl(jdbcurl);
+//        return fakeDataSource;
+//    }
     @Bean // Here '$' sign represents (take the string and replace with its value)
-    FakeDataSource fakeDataSource(
-            @Value("${guru.username}") String username,
-            @Value("${guru.password}") String password,
-            @Value("${guru.jdbcurl}") String jdbcurl){
+    FakeDataSource fakeDataSource(SfgConfiguration sfgConfiguration){
         FakeDataSource fakeDataSource = new FakeDataSource();
-        fakeDataSource.setUsername(username);
-        fakeDataSource.setPassword(password);
-        fakeDataSource.setJdbcurl(jdbcurl);
+        fakeDataSource.setUsername(sfgConfiguration.getUsername());
+        fakeDataSource.setPassword(sfgConfiguration.getPassword());
+        fakeDataSource.setJdbcurl(sfgConfiguration.getJdbcurl());
         return fakeDataSource;
     }
     @Bean
@@ -80,5 +88,8 @@ public class GreetingServiceConfig {
     @Bean("i18nService")
     I18nSpanishGreetingService i18nSpanishGreetingService(){
         return new I18nSpanishGreetingService();
+    }
+    public String hello(){
+        return "Hello World!";
     }
 }

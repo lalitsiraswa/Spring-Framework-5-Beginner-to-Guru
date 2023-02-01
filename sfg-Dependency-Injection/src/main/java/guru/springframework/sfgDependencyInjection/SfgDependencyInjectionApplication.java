@@ -1,5 +1,7 @@
 package guru.springframework.sfgDependencyInjection;
 
+import guru.springframework.sfgDependencyInjection.config.GreetingServiceConfig;
+import guru.springframework.sfgDependencyInjection.config.SfgConfiguration;
 import guru.springframework.sfgDependencyInjection.controllers.*;
 import guru.springframework.sfgDependencyInjection.datasource.FakeDataSource;
 import guru.springframework.sfgDependencyInjection.services.PrototypeBean;
@@ -63,5 +65,12 @@ public class SfgDependencyInjectionApplication {
 		System.out.println(fakeDataSource.getUsername());
 		System.out.println(fakeDataSource.getPassword());
 		System.out.println(fakeDataSource.getJdbcurl());
+		System.out.println("------------------ Properties Binding ------------------");
+		SfgConfiguration sfgConfiguration = (SfgConfiguration)applicationContext.getBean("sfgConfiguration");
+		System.out.println(sfgConfiguration.getUsername());
+		System.out.println(sfgConfiguration.getPassword());
+		System.out.println(sfgConfiguration.getJdbcurl());
+		GreetingServiceConfig gsc = (GreetingServiceConfig) applicationContext.getBean("greetingServiceConfig");
+		System.out.println(gsc.hello());
 	}
 }
